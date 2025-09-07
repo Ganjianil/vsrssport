@@ -356,7 +356,7 @@ function App() {
       ],
     },
     {
-      name: "Yerragadda",
+      name: "Erragadda",
       city: "Hyderabad",
       state: "Telangana",
       description:
