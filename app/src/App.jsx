@@ -1090,7 +1090,7 @@ function App() {
   };
 
   const handleEmail = () => {
-    window.open("mailto:vsrssportsboxcricket@gmail.com", "_self");
+    window.open("mailto:vsrsportsboxcricket@gmail.com", "_self");
   };
 
   const hideContactPanel = () => {
@@ -1140,7 +1140,7 @@ function App() {
         <div className="container">
           <div className="header-content">
             <a href="#" className="logo">
-              VSRSSports
+              VSR Sports
             </a>
 
             {/* Desktop Navigation */}
@@ -1287,7 +1287,7 @@ function App() {
       <div className={`mobile-nav ${mobileNavOpen ? "open" : ""}`}>
         <div className="mobile-nav-header">
           <a href="#" className="logo">
-            VSRSSports
+            VSR Sports
           </a>
           <button className="mobile-menu" onClick={toggleMobileNav}>
             <XIcon />
@@ -1576,7 +1576,7 @@ function App() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
-              <h4>VSRSSports</h4>
+              <h4>VSR Sports</h4>
               <p>
                 India's premier box cricket construction company offering
                 world-class venue construction, professional infrastructure
@@ -1637,7 +1637,7 @@ function App() {
           </div>
           <div className="footer-bottom">
             <p>
-              &copy; 2024 VSRSSports. All rights reserved. | Professional Box
+              &copy; 2025 VSR Sports. All rights reserved. | Professional Box
               Cricket Construction | Premium facility construction across India
             </p>
           </div>
