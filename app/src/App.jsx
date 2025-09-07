@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-// Premium Icons (same as before)
+// Premium Icons
 const MenuIcon = () => (
   <svg
     width="24"
@@ -27,20 +27,6 @@ const PhoneIcon = () => (
     strokeWidth="2"
   >
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-  </svg>
-);
-
-const ClockIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <circle cx="12" cy="12" r="10"></circle>
-    <polyline points="12,6 12,12 16,14"></polyline>
   </svg>
 );
 
@@ -72,12 +58,6 @@ const XIcon = () => (
   </svg>
 );
 
-const StarIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
-  </svg>
-);
-
 const PlayIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
     <polygon points="5,3 19,12 5,21"></polygon>
@@ -98,18 +78,30 @@ const SearchIcon = () => (
   </svg>
 );
 
+// Contact Icons
+const WhatsAppIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+  </svg>
+);
+
+const MailIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+  </svg>
+);
+
 function App() {
-  const [showBookingModal, setShowBookingModal] = useState(false);
-  const [showLocationModal, setShowLocationModal] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [showContactPanel, setShowContactPanel] = useState(true);
+  const [selectedState, setSelectedState] = useState("Telangana"); // Default to show Hyderabad venues
+  const [showLocationModal, setShowLocationModal] = useState(false);
 
   // Handle scroll effect for header
   useEffect(() => {
@@ -120,21 +112,50 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Load Tawk.to script - FIXED VERSION
+  useEffect(() => {
+    // Check if Tawk.to is already loaded
+    if (window.Tawk_API) {
+      return;
+    }
+
+    // Create and configure the script
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://embed.tawk.to/68bd4542ff0b1f192377f72c/1j4hld39m";
+    script.charset = "UTF-8";
+    script.setAttribute("crossorigin", "*");
+
+    // Add script to head instead of body for better loading
+    document.head.appendChild(script);
+
+    // Initialize Tawk_API
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_LoadStart = new Date();
+
+    // Cleanup function
+    return () => {
+      // Only remove if we added it
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
   // Premium location data with enhanced features
   const mainLocations = [
     {
       id: "ap",
       name: "Andhra Pradesh",
       description:
-        "Experience world-class box cricket facilities across AP with cutting-edge synthetic turf, professional coaching, and tournament-grade equipment.",
+        "We construct premium box cricket facilities across AP with cutting-edge synthetic turf, professional coaching infrastructure, and tournament-grade equipment installations.",
       image: "/andhra.jpg",
-      phone: "+91-9876543210",
       badge: "Premium",
       features: [
-        "Professional Coaching",
-        "Tournament Grade",
-        "Climate Control",
-        "24/7 Available",
+        "Professional Construction",
+        "Tournament Grade Turf",
+        "Climate Control Systems",
+        "24/7 Support",
       ],
       groundClass: "ap",
     },
@@ -142,16 +163,15 @@ function App() {
       id: "telangana",
       name: "Telangana",
       description:
-        "State-of-the-art box cricket venues featuring advanced LED lighting, climate-controlled environments, and expert coaching staff.",
+        "State-of-the-art box cricket venue construction featuring advanced LED lighting systems, climate-controlled environments, and expert coaching facility setups.",
       image: "/hyd.jpg",
       icon: "🏟️",
-      phone: "+91-9876543211",
       badge: "Elite",
       features: [
-        "LED Lighting",
-        "Expert Coaches",
-        "Premium Courts",
-        "Live Streaming",
+        "LED Lighting Systems",
+        "Expert Construction",
+        "Premium Court Building",
+        "Live Streaming Setup",
       ],
       groundClass: "telangana",
     },
@@ -159,22 +179,21 @@ function App() {
       id: "bangalore",
       name: "Bangalore",
       description:
-        "Premium box cricket centers in Silicon Valley of India with smart booking systems, professional facilities, and corporate packages.",
+        "Premium box cricket center construction in Silicon Valley of India with smart facility systems, professional infrastructure, and corporate-grade installations.",
       image: "/bangalore.jpg",
       icon: "⚡",
-      phone: "+91-9876543212",
       badge: "Corporate",
       features: [
-        "Smart Booking",
-        "Corporate Packages",
+        "Smart Construction",
+        "Corporate Infrastructure",
         "Tech Integration",
-        "VIP Lounges",
+        "VIP Facility Setup",
       ],
       groundClass: "bangalore",
     },
   ];
 
-  // All locations data (same as before but with ground images)
+  // All locations data
   const hyderabadLocations = [
     {
       name: "Kondapur",
@@ -183,7 +202,6 @@ function App() {
       description:
         "Ultra-modern facility with 6 premium courts, professional coaching academy, advanced player analytics, and corporate event hosting.",
       image: "/c1.jpeg",
-      phone: "+91-9876543213",
       icon: "🏢",
       features: [
         "6 Premium Courts",
@@ -200,7 +218,6 @@ function App() {
       description:
         "Corporate hub facility with flexible timing, team building packages, conference rooms, and tech-enabled smart courts.",
       icon: "🏢",
-      phone: "+91-9876543217",
       image: "/c2.jpeg",
       features: [
         "Smart Courts",
@@ -217,7 +234,6 @@ function App() {
       description:
         "Tech-enabled facility in IT corridor with smart courts, digital scoreboards, live match streaming, and VIP lounges.",
       icon: "🚀",
-      phone: "+91-9876543215",
       image: "/c3.jpeg",
       features: [
         "Digital Scoreboards",
@@ -234,7 +250,6 @@ function App() {
       description:
         "Elite facility with spa services, fine dining restaurant, luxury changing rooms, and exclusive member benefits.",
       icon: "👑",
-      phone: "+91-9876543219",
       image: "/c4.jpeg",
       features: [
         "Spa Services",
@@ -251,7 +266,6 @@ function App() {
       description:
         "Premium location with rooftop courts, panoramic city views, exclusive member benefits, and celebrity coaching sessions.",
       icon: "🌟",
-      phone: "+91-9876543216",
       image: "/c5.jpeg",
       features: [
         "Rooftop Courts",
@@ -268,7 +282,6 @@ function App() {
       description:
         "Family-friendly venue with kids academy, birthday party packages, recreational activities, and weekend tournaments.",
       icon: "🎪",
-      phone: "+91-9876543250",
       image: "/c6.jpeg",
       features: [
         "Kids Academy",
@@ -285,7 +298,6 @@ function App() {
       description:
         "Suburban facility with spacious courts, ample parking, weekend tournaments, and metro connectivity for easy access.",
       icon: "🌳",
-      phone: "+91-9876543223",
       image: "/c7.jpeg",
       features: [
         "Spacious Courts",
@@ -302,7 +314,6 @@ function App() {
       description:
         "Modern facility with state-of-the-art equipment, professional coaching, youth development programs, and community events.",
       icon: "🎯",
-      phone: "+91-9876543251",
       image: "/c8.jpeg",
       features: [
         "Modern Equipment",
@@ -319,7 +330,6 @@ function App() {
       description:
         "Community-focused venue with kids academy, birthday party packages, recreational activities, and local tournament hosting.",
       icon: "🎪",
-      phone: "+91-9876543220",
       image: "/c9.jpeg",
       features: [
         "Community Focus",
@@ -336,7 +346,6 @@ function App() {
       description:
         "Growing residential area facility with modern courts, family packages, coaching classes, and flexible membership options.",
       icon: "🏘️",
-      phone: "+91-9876543252",
       image: "/c10.jpeg",
       features: [
         "Residential Area",
@@ -353,7 +362,6 @@ function App() {
       description:
         "Strategic location with excellent connectivity, professional tournaments, corporate packages, and advanced booking systems.",
       icon: "🛣️",
-      phone: "+91-9876543253",
       image: "/c11.jpeg",
       features: [
         "Strategic Location",
@@ -370,7 +378,6 @@ function App() {
       description:
         "Emerging area facility with modern infrastructure, youth development programs, weekend leagues, and community engagement.",
       icon: "🌱",
-      phone: "+91-9876543254",
       image: "/c12.jpeg",
       features: [
         "Modern Infrastructure",
@@ -387,7 +394,6 @@ function App() {
       description:
         "Industrial area facility with corporate-friendly packages, team building events, flexible timings, and professional coaching.",
       icon: "🏭",
-      phone: "+91-9876543255",
       image: "/c13.jpeg",
       features: [
         "Industrial Location",
@@ -404,7 +410,6 @@ function App() {
       description:
         "Outer ring road facility with spacious grounds, tournament hosting, ample parking, and weekend special programs.",
       icon: "🛤️",
-      phone: "+91-9876543256",
       image: "/c22.jpeg",
       features: [
         "ORR Location",
@@ -421,7 +426,6 @@ function App() {
       description:
         "Residential hub facility with family-oriented programs, kids coaching, birthday celebrations, and community tournaments.",
       icon: "🏡",
-      phone: "+91-9876543257",
       image: "/c23.jpeg",
       features: [
         "Residential Hub",
@@ -438,7 +442,6 @@ function App() {
       description:
         "Traditional area facility with heritage ambiance, local community programs, affordable packages, and cultural events.",
       icon: "🏛️",
-      phone: "+91-9876543258",
       image: "/c16.jpeg",
       features: [
         "Heritage Ambiance",
@@ -455,7 +458,6 @@ function App() {
       description:
         "Central location with easy metro connectivity, student-friendly packages, coaching classes, and educational partnerships.",
       icon: "🚇",
-      phone: "+91-9876543222",
       image: "/c17.jpeg",
       features: [
         "Metro Connectivity",
@@ -472,7 +474,6 @@ function App() {
       description:
         "Commercial hub facility with business-friendly packages, corporate events, professional networking, and premium amenities.",
       icon: "🏪",
-      phone: "+91-9876543259",
       image: "/c18.jpeg",
       features: [
         "Commercial Hub",
@@ -489,7 +490,6 @@ function App() {
       description:
         "Historic area facility with traditional hospitality, modern equipment, cultural events, and community engagement programs.",
       icon: "🕌",
-      phone: "+91-9876543260",
       image: "/c19.jpeg",
       features: [
         "Historic Location",
@@ -506,7 +506,6 @@ function App() {
       description:
         "Growing suburb facility with modern infrastructure, family packages, youth programs, and weekend entertainment.",
       icon: "🌆",
-      phone: "+91-9876543261",
       image: "/c20.jpeg",
       features: [
         "Growing Suburb",
@@ -523,7 +522,6 @@ function App() {
       description:
         "University area facility with student-friendly programs, educational discounts, coaching academies, and skill development.",
       icon: "🎓",
-      phone: "+91-9876543262",
       image: "/c21.jpeg",
       features: [
         "University Area",
@@ -540,7 +538,6 @@ function App() {
       description:
         "Eastern hub with multiple courts, professional lighting, corporate event hosting, and tournament-grade facilities.",
       icon: "🌅",
-      phone: "+91-9876543224",
       image: "/c22.jpeg",
       features: [
         "Multiple Courts",
@@ -557,7 +554,6 @@ function App() {
       description:
         "Industrial town facility with corporate partnerships, team building programs, spacious grounds, and professional coaching.",
       icon: "🏭",
-      phone: "+91-9876543263",
       image: "/c23.jpeg",
       features: [
         "Industrial Town",
@@ -574,7 +570,6 @@ function App() {
       description:
         "IT corridor extension facility with modern amenities, tech integration, corporate packages, and flexible scheduling.",
       icon: "💻",
-      phone: "+91-9876543264",
       image: "/c1.jpeg",
       features: [
         "IT Corridor",
@@ -586,7 +581,6 @@ function App() {
     },
   ];
 
-  // Bangalore and AP locations (same structure as before)
   const bangaloreLocations = [
     {
       name: "Koramangala",
@@ -595,7 +589,6 @@ function App() {
       description:
         "Trendy location in startup hub with modern facilities and tech-savvy amenities.",
       icon: "💻",
-      phone: "+91-9876543225",
       image: "/c2.jpeg",
       features: [
         "Startup Hub",
@@ -612,7 +605,6 @@ function App() {
       description:
         "Premium facility in upscale neighborhood with fine dining and entertainment options.",
       icon: "🍽️",
-      phone: "+91-9876543226",
       image: "/c3.jpeg",
       features: [
         "Upscale Area",
@@ -629,7 +621,6 @@ function App() {
       description:
         "IT corridor location with corporate packages, flexible timings, and team building events.",
       icon: "🏢",
-      phone: "+91-9876543227",
       image: "/c4.jpeg",
       features: [
         "IT Corridor",
@@ -646,7 +637,6 @@ function App() {
       description:
         "Tech park facility with advanced booking systems and professional coaching staff.",
       icon: "⚡",
-      phone: "+91-9876543228",
       image: "/c5.jpeg",
       features: [
         "Tech Park",
@@ -663,7 +653,6 @@ function App() {
       description:
         "Traditional area with modern courts, family packages, and cultural events.",
       icon: "🏛️",
-      phone: "+91-9876543229",
       image: "/c6.jpeg",
       features: [
         "Traditional Area",
@@ -680,7 +669,6 @@ function App() {
       description:
         "Residential hub with community-focused programs and weekend leagues.",
       icon: "🏘️",
-      phone: "+91-9876543230",
       image: "/c7.jpeg",
       features: [
         "Residential Hub",
@@ -697,7 +685,6 @@ function App() {
       description:
         "Central location with excellent connectivity and professional tournament hosting.",
       icon: "🛣️",
-      phone: "+91-9876543231",
       image: "/c8.jpeg",
       features: [
         "Central Location",
@@ -714,7 +701,6 @@ function App() {
       description:
         "South Bangalore facility with spacious courts and coaching academy.",
       icon: "🏟️",
-      phone: "+91-9876543232",
       image: "/11.jpeg",
       features: [
         "South Bangalore",
@@ -731,7 +717,6 @@ function App() {
       description:
         "Emerging IT hub with state-of-the-art facilities and tech integration.",
       icon: "🌐",
-      phone: "+91-9876543245",
       image: "/i2.jpeg",
       features: [
         "IT Hub",
@@ -748,7 +733,6 @@ function App() {
       description:
         "Lake-side facility with premium amenities and corporate event hosting.",
       icon: "🏞️",
-      phone: "+91-9876543246",
       image: "/i3.jpeg",
       features: [
         "Lake Side",
@@ -765,7 +749,6 @@ function App() {
       description:
         "North Bangalore venue with excellent connectivity and modern facilities.",
       icon: "🛤️",
-      phone: "+91-9876543247",
       image: "/i4.jpeg",
       features: [
         "North Bangalore",
@@ -782,7 +765,6 @@ function App() {
       description:
         "Central location with traditional charm and modern sports facilities.",
       icon: "🏛️",
-      phone: "+91-9876543248",
       image: "/i5.jpeg",
       features: [
         "Central Location",
@@ -802,7 +784,6 @@ function App() {
       description:
         "Commercial capital facility with premium courts and business-friendly packages.",
       icon: "🏪",
-      phone: "+91-9876543233",
       image: "/i6.jpeg",
       features: [
         "Commercial Capital",
@@ -819,7 +800,6 @@ function App() {
       description:
         "Coastal city venue with sea-view courts and resort-style amenities.",
       icon: "🌊",
-      phone: "+91-9876543234",
       image: "/i7.jpeg",
       features: [
         "Coastal Location",
@@ -836,7 +816,6 @@ function App() {
       description:
         "Agricultural hub with community-focused programs and local tournament hosting.",
       icon: "🌾",
-      phone: "+91-9876543235",
       image: "/c1.jpeg",
       features: [
         "Agricultural Hub",
@@ -853,7 +832,6 @@ function App() {
       description:
         "Growing city facility with modern equipment and youth development programs.",
       icon: "🌱",
-      phone: "+91-9876543236",
       image: "/c1.jpeg",
       features: [
         "Growing City",
@@ -870,7 +848,6 @@ function App() {
       description:
         "Historic city venue with traditional hospitality and modern facilities.",
       icon: "🏰",
-      phone: "+91-9876543237",
       image: "/c1.jpeg",
       features: [
         "Historic City",
@@ -887,7 +864,6 @@ function App() {
       description:
         "Cultural hub with heritage ambiance and professional coaching programs.",
       icon: "🎭",
-      phone: "+91-9876543238",
       image: "/c1.jpeg",
       features: [
         "Cultural Hub",
@@ -904,7 +880,6 @@ function App() {
       description:
         "Spiritual city facility with peaceful environment and family-friendly packages.",
       icon: "🕉️",
-      phone: "+91-9876543239",
       image: "/c1.jpeg",
       features: [
         "Spiritual City",
@@ -921,7 +896,6 @@ function App() {
       description:
         "Port city venue with international standard courts and maritime-themed decor.",
       icon: "⚓",
-      phone: "+91-9876543240",
       image: "/c1.jpeg",
       features: [
         "Port City",
@@ -938,7 +912,6 @@ function App() {
       description:
         "District headquarters facility with government partnerships and community programs.",
       icon: "🏛️",
-      phone: "+91-9876543270",
       image: "/c1.jpeg",
       features: [
         "District HQ",
@@ -955,7 +928,6 @@ function App() {
       description:
         "Border city facility with interstate connectivity and diverse cultural programs.",
       icon: "🌉",
-      phone: "+91-9876543271",
       image: "/c1.jpeg",
       features: [
         "Border City",
@@ -972,26 +944,6 @@ function App() {
     ...hyderabadLocations,
     ...bangaloreLocations,
     ...apLocations,
-  ];
-
-  const timeSlots = [
-    "6:00 AM",
-    "7:00 AM",
-    "8:00 AM",
-    "9:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "12:00 PM",
-    "1:00 PM",
-    "2:00 PM",
-    "3:00 PM",
-    "4:00 PM",
-    "5:00 PM",
-    "6:00 PM",
-    "7:00 PM",
-    "8:00 PM",
-    "9:00 PM",
-    "10:00 PM",
   ];
 
   // Updated gallery items with video support
@@ -1032,7 +984,7 @@ function App() {
       type: "video",
       title: "Technology Integration",
       description:
-        "Smart scoreboards, performance analytics, and digital coaching tools for enhanced experience.",
+        "Smart scoreboards, performance analytic, and digital coaching tools for enhanced experience.",
       video: "/v5.mp4",
       icon: "📱",
     },
@@ -1047,10 +999,10 @@ function App() {
   ];
 
   const stats = [
-    { number: "50+", label: "Premium Venues" },
-    { number: "15K+", label: "Happy Players" },
-    { number: "800+", label: "Tournaments Hosted" },
-    { number: "24/7", label: "Customer Support" },
+    { number: "50+", label: "Venues Constructed" },
+    { number: "30+", label: "Cities Covered" },
+    { number: "100K+", label: "Sq. Ft. Turf Installed" },
+    { number: "99%", label: "Client Satisfaction Rate" },
   ];
 
   // Enhanced search functionality
@@ -1082,15 +1034,15 @@ function App() {
     setSearchQuery("");
     setShowSearchResults(false);
     setShowMobileSearch(false);
-    handleBooking(`${location.name}, ${location.city}`, location);
   };
 
-  // Handle state card clicks in hero section - FIXED
+  // Handle state card clicks - NEW FUNCTIONALITY
   const handleStateClick = (stateName) => {
     setSelectedState(stateName);
     setShowLocationModal(true);
   };
 
+  // Get locations by state - NEW FUNCTIONALITY
   const getLocationsByState = (stateName) => {
     switch (stateName) {
       case "Andhra Pradesh":
@@ -1104,47 +1056,9 @@ function App() {
     }
   };
 
-  const handleBooking = (locationName, locationData = null) => {
-    setSelectedLocation(locationName);
-    setShowBookingModal(true);
-    setShowLocationModal(false);
-  };
-
-  const handleCall = (phoneNumber) => {
-    window.open(`tel:${phoneNumber}`, "_self");
-  };
-
-  const handleWhatsAppBooking = () => {
-    if (!selectedTimeSlot) {
-      alert("Please select a time slot to proceed with booking");
-      return;
-    }
-
-    const message = `🏏 VSRSSports Premium Booking Request
-
-📍 Location: ${selectedLocation}
-⏰ Time Slot: ${selectedTimeSlot}
-📅 Date: ${new Date().toLocaleDateString()}
-🎯 Booking Type: Premium Box Cricket
-
-Hi! I would like to book a premium box cricket slot at your ${selectedLocation} facility. Please confirm availability and send booking details with pricing.
-
-✅ Features I'm interested in:
-• Professional Equipment
-• Climate Controlled Environment
-• LED Lighting
-• Digital Scoreboard
-• Changing Rooms
-• Refreshments
-
-Thank you for your premium service!`;
-
-    const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappUrl, "_blank");
-    setShowBookingModal(false);
-    setSelectedTimeSlot("");
+  // Get current venues to display based on selected state
+  const getCurrentVenues = () => {
+    return getLocationsByState(selectedState);
   };
 
   const scrollToSection = (sectionId) => {
@@ -1166,8 +1080,61 @@ Thank you for your premium service!`;
     }
   };
 
+  // Contact handlers
+  const handleWhatsApp = () => {
+    window.open("https://wa.me/919951666645", "_blank");
+  };
+
+  const handleCall = () => {
+    window.open("tel:+919951666645", "_self");
+  };
+
+  const handleEmail = () => {
+    window.open("mailto:vsrssportsboxcricket@gmail.com", "_self");
+  };
+
+  const hideContactPanel = () => {
+    setShowContactPanel(false);
+  };
+
+  // Handle Tawk.to chat click
+  const handleTawkChat = () => {
+    if (window.Tawk_API && window.Tawk_API.maximize) {
+      window.Tawk_API.maximize();
+    } else {
+      // Fallback - try to trigger chat after a short delay
+      setTimeout(() => {
+        if (window.Tawk_API && window.Tawk_API.maximize) {
+          window.Tawk_API.maximize();
+        }
+      }, 1000);
+    }
+  };
+
   return (
     <div className="App">
+      {/* Right Side Contact Panel */}
+      {showContactPanel && (
+        <div className="contact-panel">
+          <div className="contact-panel-close" onClick={hideContactPanel}>
+            <XIcon />
+            <span className="close-tooltip">Close</span>
+          </div>
+          <div className="contact-item whatsapp" onClick={handleWhatsApp}>
+            <WhatsAppIcon />
+            <span className="tooltip">WhatsApp</span>
+          </div>
+          <div className="contact-item email" onClick={handleEmail}>
+            <MailIcon />
+            <span className="tooltip">Email</span>
+          </div>
+          <div className="contact-item phone" onClick={handleCall}>
+            <PhoneIcon />
+            <span className="tooltip">Call</span>
+          </div>
+        </div>
+      )}
+
       {/* Premium Header with Mobile Search */}
       <header className={`header ${headerScrolled ? "scrolled" : ""}`}>
         <div className="container">
@@ -1354,26 +1321,26 @@ Thank you for your premium service!`;
         </div>
         <div className="container">
           <div className="hero-content animate-fadeInUp">
-            <h1>Premium Box Cricket Experience</h1>
-            <div className="subtitle">Where Champions Are Made</div>
+            <h1>Premium Box Cricket Construction</h1>
+            <div className="subtitle">Where Champions Are Built</div>
             <p>
-              Book your slot across AP, Telangana, and Bangalore with VSRSSports
-              - Experience world-class facilities, professional coaching, and
-              tournament-grade equipment at India's most premium box cricket
-              venues.
+              We construct world-class box cricket facilities with
+              professional-grade synthetic turf, tournament-standard equipment,
+              and cutting-edge infrastructure across AP, Telangana, and
+              Bangalore.
             </p>
             <div className="cta-buttons">
               <button
                 className="cta-button"
-                onClick={() => setShowMobileSearch(true)}
+                onClick={() => scrollToSection("locations")}
               >
-                🏏 Book Your Slot
+                🏗️ View Our Projects
               </button>
               <button
                 className="cta-button secondary"
                 onClick={() => scrollToSection("gallery")}
               >
-                <PlayIcon /> Watch Gallery
+                <PlayIcon /> Construction Gallery
               </button>
             </div>
           </div>
@@ -1394,13 +1361,13 @@ Thank you for your premium service!`;
         </div>
       </section>
 
-      {/* Enhanced Premium Locations Section with Ground Images */}
+      {/* Enhanced Premium Locations Section - CLICKABLE CARDS */}
       <section id="locations" className="locations">
         <div className="container">
-          <h2 className="section-title">Our Premium Locations</h2>
+          <h2 className="section-title">Our Construction Projects</h2>
           <p className="section-subtitle">
-            Click on any state to explore all available venues and book your
-            preferred slot
+            Click on any state to explore our box cricket construction projects
+            and venues
           </p>
           <div className="locations-grid">
             {mainLocations.map((location) => (
@@ -1408,6 +1375,7 @@ Thank you for your premium service!`;
                 key={location.id}
                 className="location-card animate-fadeInUp"
                 onClick={() => handleStateClick(location.name)}
+                style={{ cursor: "pointer" }}
               >
                 <div className="location-image-container">
                   <img
@@ -1432,25 +1400,8 @@ Thank you for your premium service!`;
                       </span>
                     ))}
                   </div>
-                  <div className="location-buttons">
-                    <button
-                      className="book-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleStateClick(location.name);
-                      }}
-                    >
-                      📍 View All Locations
-                    </button>
-                    <button
-                      className="call-button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCall(location.phone);
-                      }}
-                    >
-                      <PhoneIcon /> Call Now
-                    </button>
+                  <div className="location-action">
+                    <button className="view-venues-btn">📍 View Venues</button>
                   </div>
                 </div>
               </div>
@@ -1459,24 +1410,45 @@ Thank you for your premium service!`;
         </div>
       </section>
 
-      {/* Enhanced Hyderabad Venues Section with Ground Images */}
+      {/* State Selector Tabs */}
+      <section className="state-selector">
+        <div className="container">
+          <div className="state-tabs">
+            {["Telangana", "Bangalore", "Andhra Pradesh"].map((state) => (
+              <button
+                key={state}
+                className={`state-tab ${
+                  selectedState === state ? "active" : ""
+                }`}
+                onClick={() => setSelectedState(state)}
+              >
+                {state === "Telangana" && "🏟️"}
+                {state === "Bangalore" && "⚡"}
+                {state === "Andhra Pradesh" && "🏪"}
+                {state}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Dynamic Venues Section Based on Selected State */}
       <section id="categories" className="categories">
         <div className="container">
-          <h2 className="section-title">Hyderabad Premium Venues</h2>
+          <h2 className="section-title">
+            {selectedState === "Telangana" && "Hyderabad Premium Venues"}
+            {selectedState === "Bangalore" && "Bangalore Premium Venues"}
+            {selectedState === "Andhra Pradesh" &&
+              "Andhra Pradesh Premium Venues"}
+          </h2>
           <p className="section-subtitle">
-            Discover our exclusive box cricket facilities across Hyderabad's
-            prime locations, each offering unique amenities and world-class
-            experiences
+            Discover our exclusive box cricket construction projects across{" "}
+            {selectedState}'s prime locations, each offering unique amenities
+            and world-class infrastructure
           </p>
           <div className="categories-grid">
-            {hyderabadLocations.map((location, index) => (
-              <div
-                key={index}
-                className="category-card animate-fadeInUp"
-                onClick={() =>
-                  handleBooking(`${location.name}, ${location.city}`, location)
-                }
-              >
+            {getCurrentVenues().map((location, index) => (
+              <div key={index} className="category-card animate-fadeInUp">
                 <div className="category-icon-container">
                   <img
                     src={location.image}
@@ -1498,31 +1470,67 @@ Thank you for your premium service!`;
                     </span>
                   ))}
                 </div>
-                <div className="category-actions">
-                  <div className="book-now">Book Slot</div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCall(location.phone);
-                    }}
-                    className="call-btn"
-                  >
-                    <PhoneIcon /> Call
-                  </button>
-                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Location Modal for Mobile/Tablet */}
+      {showLocationModal && (
+        <div
+          className="location-modal-overlay"
+          onClick={() => setShowLocationModal(false)}
+        >
+          <div className="location-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="location-modal-header">
+              <h3>🏗️ {selectedState} Construction Projects</h3>
+              <button
+                className="close-button"
+                onClick={() => setShowLocationModal(false)}
+              >
+                <XIcon />
+              </button>
+            </div>
+            <div className="location-modal-grid">
+              {getLocationsByState(selectedState).map((location, index) => (
+                <div key={index} className="location-modal-item">
+                  <div className="location-modal-image">
+                    <img
+                      src={location.image}
+                      alt={location.name}
+                      className="modal-image"
+                    />
+                    <div className="location-modal-icon">
+                      <span>{location.icon}</span>
+                    </div>
+                  </div>
+                  <h4>
+                    <MapPinIcon /> {location.name}
+                  </h4>
+                  <p>{location.description}</p>
+                  <div className="location-modal-features">
+                    {location.features &&
+                      location.features
+                        .slice(0, 4)
+                        .map((feature, idx) => (
+                          <span key={idx}>{feature}</span>
+                        ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Premium Gallery Section with Video Support */}
       <section id="gallery" className="gallery">
         <div className="container">
-          <h2 className="section-title">Gallery & Experience</h2>
+          <h2 className="section-title">Construction Gallery & Projects</h2>
           <p className="section-subtitle">
-            Take a virtual tour of our premium facilities and witness the
-            excitement of box cricket at its finest
+            Take a virtual tour of our construction projects and witness the
+            excellence of our box cricket facility construction
           </p>
           <div className="gallery-grid">
             {galleryItems.map((item, index) => (
@@ -1563,16 +1571,17 @@ Thank you for your premium service!`;
         </div>
       </section>
 
-      {/* Enhanced Footer with All Locations */}
+      {/* Enhanced Footer */}
       <footer id="contact" className="footer">
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
               <h4>VSRSSports</h4>
               <p>
-                India's premier box cricket facility network offering
-                world-class venues, professional coaching, and tournament-grade
-                equipment across AP, Telangana, and Bangalore.
+                India's premier box cricket construction company offering
+                world-class venue construction, professional infrastructure
+                development, and tournament-grade facility installations across
+                AP, Telangana, and Bangalore.
               </p>
               <div className="social-links">
                 <a href="#" className="social-link">
@@ -1591,287 +1600,49 @@ Thank you for your premium service!`;
             </div>
 
             <div className="footer-section">
-              <h4>Hyderabad Locations</h4>
-              <a href="#" onClick={() => handleBooking("Kondapur, Hyderabad")}>
-                Kondapur
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Gachibowli, Hyderabad")}
-              >
-                Gachibowli
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Hitec City, Hyderabad")}
-              >
-                Hitec City
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Jubilee Hills, Hyderabad")}
-              >
-                Jubilee Hills
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Banjara Hills, Hyderabad")}
-              >
-                Banjara Hills
-              </a>
-              <a href="#" onClick={() => handleBooking("Miyapur, Hyderabad")}>
-                Miyapur
-              </a>
-              <a href="#" onClick={() => handleBooking("Ameerpet, Hyderabad")}>
-                Ameerpet
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Kukatpally, Hyderabad")}
-              >
-                Kukatpally
-              </a>
+              <h4>Hyderabad Projects</h4>
+              <a href="#">Kondapur</a>
+              <a href="#">Gachibowli</a>
+              <a href="#">Hitec City</a>
+              <a href="#">Jubilee Hills</a>
+              <a href="#">Banjara Hills</a>
+              <a href="#">Miyapur</a>
+              <a href="#">Ameerpet</a>
+              <a href="#">Kukatpally</a>
             </div>
 
             <div className="footer-section">
-              <h4>Bangalore Locations</h4>
-              <a
-                href="#"
-                onClick={() => handleBooking("Koramangala, Bangalore")}
-              >
-                Koramangala
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Indiranagar, Bangalore")}
-              >
-                Indiranagar
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Whitefield, Bangalore")}
-              >
-                Whitefield
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Electronic City, Bangalore")}
-              >
-                Electronic City
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("HSR Layout, Bangalore")}
-              >
-                HSR Layout
-              </a>
-              <a
-                href="#"
-                onClick={() => handleBooking("Marathahalli, Bangalore")}
-              >
-                Marathahalli
-              </a>
-
-              <a href="#" onClick={() => handleBooking("Jayanagar, Bangalore")}>
-                Jayanagar
-              </a>
-              <a href="#" onClick={() => handleBooking("Sarjapur, Bangalore")}>
-                Sarjapur
-              </a>
+              <h4>Bangalore Projects</h4>
+              <a href="#">Koramangala</a>
+              <a href="#">Indiranagar</a>
+              <a href="#">Whitefield</a>
+              <a href="#">Electronic City</a>
+              <a href="#">HSR Layout</a>
+              <a href="#">Marathahalli</a>
+              <a href="#">Jayanagar</a>
+              <a href="#">Sarjapur</a>
             </div>
 
             <div className="footer-section">
-              <h4>Andhra Pradesh Locations</h4>
-              <a href="#" onClick={() => handleBooking("Vijayawada")}>
-                Vijayawada
-              </a>
-              <a href="#" onClick={() => handleBooking("Visakhapatnam")}>
-                Visakhapatnam
-              </a>
-              <a href="#" onClick={() => handleBooking("Guntur")}>
-                Guntur
-              </a>
-
-              <a href="#" onClick={() => handleBooking("Nellore")}>
-                Nellore
-              </a>
-              <a href="#" onClick={() => handleBooking("Kurnool")}>
-                Kurnool
-              </a>
-              <a href="#" onClick={() => handleBooking("Tirupati")}>
-                Tirupati
-              </a>
-              <a href="#" onClick={() => handleBooking("Kakinada")}>
-                Kakinada
-              </a>
-              <a href="#" onClick={() => handleBooking("Rajahmundry")}>
-                Rajahmundry
-              </a>
+              <h4>Andhra Pradesh Projects</h4>
+              <a href="#">Vijayawada</a>
+              <a href="#">Visakhapatnam</a>
+              <a href="#">Guntur</a>
+              <a href="#">Nellore</a>
+              <a href="#">Kurnool</a>
+              <a href="#">Tirupati</a>
+              <a href="#">Kakinada</a>
+              <a href="#">Rajahmundry</a>
             </div>
           </div>
           <div className="footer-bottom">
             <p>
-              &copy; 2024 VSRSSports. All rights reserved. | Designed for
-              cricket enthusiasts | Premium box cricket experience across India
+              &copy; 2024 VSRSSports. All rights reserved. | Professional Box
+              Cricket Construction | Premium facility construction across India
             </p>
           </div>
         </div>
       </footer>
-
-      {/* Location Modal - FIXED */}
-      {showLocationModal && (
-        <div
-          className="location-modal-overlay"
-          onClick={() => setShowLocationModal(false)}
-        >
-          <div className="location-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="location-modal-header">
-              <h3>🏏 {selectedState} Locations</h3>
-              <button
-                className="close-button"
-                onClick={() => setShowLocationModal(false)}
-              >
-                <XIcon />
-              </button>
-            </div>
-
-            <div className="location-modal-grid">
-              {getLocationsByState(selectedState).map((location, index) => (
-                <div
-                  key={index}
-                  className="location-modal-item"
-                  onClick={() =>
-                    handleBooking(
-                      `${location.name}, ${location.city}`,
-                      location
-                    )
-                  }
-                >
-                  <h4>
-                    <MapPinIcon /> {location.name}
-                  </h4>
-                  <p>{location.description}</p>
-                  <div className="location-modal-features">
-                    {location.features &&
-                      location.features
-                        .slice(0, 4)
-                        .map((feature, idx) => (
-                          <span key={idx}>{feature}</span>
-                        ))}
-                  </div>
-                  <div className="location-modal-buttons">
-                    <button className="location-modal-book">Book Slot</button>
-                    <button
-                      className="location-modal-call"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCall(location.phone);
-                      }}
-                    >
-                      <PhoneIcon /> Call
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Enhanced Booking Modal */}
-      {showBookingModal && (
-        <div
-          className="modal-overlay"
-          onClick={() => setShowBookingModal(false)}
-        >
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3>🏏 Book Premium Slot - {selectedLocation}</h3>
-              <button
-                className="close-button"
-                onClick={() => setShowBookingModal(false)}
-              >
-                <XIcon />
-              </button>
-            </div>
-
-            <div className="time-slots-section">
-              <h4>
-                <ClockIcon /> Select Your Preferred Time Slot
-              </h4>
-              <div className="time-slots">
-                {timeSlots.map((slot) => (
-                  <div
-                    key={slot}
-                    className={`time-slot ${
-                      selectedTimeSlot === slot ? "selected" : ""
-                    }`}
-                    onClick={() => setSelectedTimeSlot(slot)}
-                  >
-                    {slot}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)",
-                padding: "2rem",
-                borderRadius: "20px",
-                marginBottom: "2rem",
-              }}
-            >
-              <h4
-                style={{
-                  color: "#2c3e50",
-                  marginBottom: "1.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  fontSize: "1.3rem",
-                }}
-              >
-                <StarIcon /> Premium Features Included
-              </h4>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                  gap: "1rem",
-                  fontSize: "1rem",
-                  color: "#64748b",
-                }}
-              >
-                <div>✅ Professional Equipment</div>
-                <div>✅ Climate Controlled</div>
-                <div>✅ LED Lighting</div>
-                <div>✅ Digital Scoreboard</div>
-                <div>✅ Changing Rooms</div>
-                <div>✅ Refreshments Available</div>
-                <div>✅ Professional Coaching</div>
-                <div>✅ Tournament Grade Courts</div>
-              </div>
-            </div>
-
-            <div className="modal-buttons">
-              <button
-                className="modal-button secondary"
-                onClick={() => setShowBookingModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="modal-button primary"
-                onClick={handleWhatsAppBooking}
-              >
-                📱 Confirm Booking via WhatsApp
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Click outside to close search results */}
       {showSearchResults && (

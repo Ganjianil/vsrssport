@@ -48,6 +48,287 @@ body {
   width: 100%;
 }
 
+/* Contact Panel */
+/* Contact Panel - Right Side */
+.contact-panel {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-panel-close {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  background: #ff4757;
+  color: white;
+  align-self: flex-end;
+}
+
+.contact-panel-close:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-heavy);
+}
+
+.close-tooltip {
+  position: absolute;
+  right: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.close-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.8);
+}
+
+.contact-panel-close:hover .close-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.contact-item {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  color: white;
+}
+
+.contact-item.whatsapp {
+  background: #25D366;
+}
+
+.contact-item.email {
+  background: #EA4335;
+}
+
+.contact-item.phone {
+  background: #007BFF;
+}
+
+.contact-item.tawk {
+  background: var(--primary-gradient);
+}
+
+.contact-item:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-heavy);
+}
+
+.contact-item .chat-icon {
+  font-size: 24px;
+}
+
+.tooltip {
+  position: absolute;
+  right: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.8);
+}
+
+.contact-item:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Responsive for Right Panel */
+@media (max-width: 768px) {
+  .contact-panel {
+    right: 10px;
+    gap: 10px;
+  }
+
+  .contact-panel-close {
+    width: 35px;
+    height: 35px;
+  }
+
+  .contact-item {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tooltip {
+    right: 60px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .close-tooltip {
+    right: 45px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-panel {
+    right: 5px;
+    gap: 8px;
+  }
+
+  .contact-panel-close {
+    width: 30px;
+    height: 30px;
+  }
+
+  .contact-item {
+    width: 45px;
+    height: 45px;
+  }
+
+  .contact-item svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-item .chat-icon {
+    font-size: 20px;
+  }
+
+  .tooltip {
+    right: 55px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .close-tooltip {
+    right: 40px;
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
+/* Rest of your existing CSS remains the same... */
+
+.contact-item {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-medium);
+  color: white;
+}
+
+.contact-item.whatsapp {
+  background: #25D366;
+}
+
+.contact-item.email {
+  background: #EA4335;
+}
+
+.contact-item.phone {
+  background: #007BFF;
+}
+
+.contact-item.tawk {
+  background: var(--primary-gradient);
+}
+
+.contact-item:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-heavy);
+}
+
+.contact-item .chat-icon {
+  font-size: 24px;
+}
+
+.tooltip {
+  position: absolute;
+  left: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: rgba(0, 0, 0, 0.8);
+}
+
+.contact-item:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Header Styles */
 .header {
   position: fixed;
@@ -666,44 +947,6 @@ body {
   font-weight: 500;
 }
 
-.location-buttons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.book-button,
-.call-button {
-  flex: 1;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-width: 140px;
-}
-
-.book-button {
-  background: var(--primary-gradient);
-  color: var(--white);
-}
-
-.call-button {
-  background: var(--success-gradient);
-  color: var(--white);
-}
-
-.book-button:hover,
-.call-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
 /* Categories Section */
 .categories {
   padding: 6rem 0;
@@ -800,51 +1043,6 @@ body {
   border-radius: 10px;
   font-size: 0.7rem;
   font-weight: 500;
-}
-
-.category-actions {
-  padding: 0 1.5rem 1.5rem;
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.book-now {
-  flex: 1;
-  background: var(--primary-gradient);
-  color: var(--white);
-  padding: 0.75rem 1rem;
-  border-radius: 20px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.book-now:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-light);
-}
-
-.call-btn {
-  background: var(--warning-gradient);
-  color: var(--white);
-  border: none;
-  border-radius: 15px;
-  padding: 0.75rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: var(--transition);
-}
-
-.call-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-light);
 }
 
 /* Gallery Section with Video Support */
@@ -1045,294 +1243,6 @@ body {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Modals */
-.modal-overlay,
-.location-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1003;
-  padding: 1rem;
-}
-
-.modal,
-.location-modal {
-  background: var(--white);
-  border-radius: var(--border-radius);
-  max-width: 600px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-heavy);
-}
-
-.modal-header,
-.location-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.modal-header h3,
-.location-modal-header h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-
-.close-button {
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: var(--transition);
-  color: var(--text-light);
-}
-
-.close-button:hover {
-  background: var(--light-bg);
-  color: var(--text-dark);
-}
-
-.time-slots-section {
-  padding: 1.5rem;
-}
-
-.time-slots-section h4 {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.time-slots {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 0.75rem;
-}
-
-.time-slot {
-  padding: 0.75rem;
-  border: 2px solid var(--border-light);
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 500;
-}
-
-.time-slot:hover {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.05);
-}
-
-.time-slot.selected {
-  background: var(--primary-gradient);
-  color: var(--white);
-  border-color: transparent;
-}
-
-.premium-features {
-  margin: 1.5rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  border-radius: var(--border-radius);
-}
-
-.premium-features h4 {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  font-size: 1rem;
-  color: var(--text-light);
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 1rem;
-  padding: 1.5rem;
-  border-top: 1px solid var(--border-light);
-}
-
-.modal-button {
-  flex: 1;
-  padding: 1rem;
-  border: none;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.modal-button.secondary {
-  background: var(--light-bg);
-  color: var(--text-dark);
-}
-
-.modal-button.primary {
-  background: var(--success-gradient);
-  color: var(--white);
-}
-
-.modal-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-light);
-}
-
-/* Location Modal */
-.location-modal-grid {
-  display: grid;
-  gap: 1rem;
-  padding: 1.5rem;
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.location-modal-item {
-  padding: 1.5rem;
-  border: 1px solid var(--border-light);
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.location-modal-item:hover {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.02);
-}
-
-.location-modal-image {
-  position: relative;
-  margin-bottom: 1rem;
-}
-
-.modal-image {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.location-modal-icon {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.location-modal-item h4 {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.location-modal-item p {
-  color: var(--text-light);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-.location-modal-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.location-modal-features span {
-  background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.location-modal-buttons {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.location-modal-book,
-.location-modal-call {
-  flex: 1;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.location-modal-book {
-  background: var(--primary-gradient);
-  color: var(--white);
-}
-
-.location-modal-call {
-  background: var(--success-gradient);
-  color: var(--white);
-}
-
-.location-modal-book:hover,
-.location-modal-call:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-light);
-}
-
-/* Search Overlay */
-.search-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
-}
-
 /* Animations */
 .animate-fadeInUp {
   animation: fadeInUp 0.6s ease-out;
@@ -1377,6 +1287,23 @@ body {
 @media (max-width: 768px) {
   .container {
     padding: 0 16px;
+  }
+
+  /* Contact Panel Mobile */
+  .contact-panel {
+    right: 10px;
+    gap: 10px;
+  }
+
+  .contact-item {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tooltip {
+    left: 60px;
+    font-size: 12px;
+    padding: 6px 10px;
   }
 
   /* Header Mobile */
@@ -1475,58 +1402,6 @@ body {
     padding: 1.5rem;
   }
 
-  .location-buttons,
-  .category-actions {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .book-button,
-  .call-button,
-  .book-now,
-  .call-btn {
-    width: 100%;
-    min-width: auto;
-  }
-
-  /* Modal Mobile */
-  .modal,
-  .location-modal {
-    margin: 1rem;
-    max-height: 85vh;
-  }
-
-  .modal-header,
-  .location-modal-header {
-    padding: 1.5rem;
-  }
-
-  .location-modal-grid {
-    grid-template-columns: 1fr;
-    padding: 1.5rem;
-    gap: 1rem;
-  }
-
-  .time-slots {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-  }
-
-  .time-slot {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.9rem;
-  }
-
-  .modal-buttons {
-    flex-direction: column;
-    padding: 1.5rem;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
   /* Footer Mobile */
   .footer {
     padding: 3rem 0 1.5rem;
@@ -1551,10 +1426,6 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .time-slots {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .cta-button {
     padding: 0.875rem 1.5rem;
     font-size: 0.9rem;
@@ -1566,6 +1437,32 @@ body {
 
   .gallery-video {
     height: 180px;
+  }
+
+  /* Contact Panel Very Small Screens */
+  .contact-panel {
+    right: 5px;
+    gap: 8px;
+  }
+
+  .contact-item {
+    width: 45px;
+    height: 45px;
+  }
+
+  .contact-item svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-item .chat-icon {
+    font-size: 20px;
+  }
+
+  .tooltip {
+    left: 55px;
+    font-size: 11px;
+    padding: 4px 8px;
   }
 }
 
@@ -1604,3 +1501,229 @@ a:focus {
     transition-duration: 0.01ms !important;
   }
 }
+/* Add these new styles to your existing CSS */
+
+/* State Selector Tabs */
+.state-selector {
+  padding: 2rem 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.state-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.state-tab {
+  padding: 1rem 2rem;
+  border: 2px solid var(--border-light);
+  border-radius: 25px;
+  background: var(--white);
+  color: var(--text-dark);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.state-tab:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.state-tab.active {
+  background: var(--primary-gradient);
+  color: var(--white);
+  border-color: transparent;
+}
+
+/* Location Action Button */
+.location-action {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.view-venues-btn {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-gradient);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.view-venues-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Location Modal Styles */
+.location-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1003;
+  padding: 1rem;
+}
+
+.location-modal {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-heavy);
+}
+
+.location-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.location-modal-header h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: var(--transition);
+  color: var(--text-light);
+}
+
+.close-button:hover {
+  background: var(--light-bg);
+  color: var(--text-dark);
+}
+
+.location-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.location-modal-item {
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.location-modal-item:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.02);
+}
+
+.location-modal-image {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.modal-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.location-modal-icon {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.location-modal-item h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.location-modal-item p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.location-modal-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.location-modal-features span {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .state-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .state-tab {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .location-modal {
+    margin: 1rem;
+    max-height: 85vh;
+  }
+
+  .location-modal-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+/* Rest of your existing CSS remains the same... */
